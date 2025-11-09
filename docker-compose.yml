@@ -1,0 +1,41 @@
+services:
+  db:
+      image: postgres:15
+      container_name: csdl_ptit_db
+      restart: unless-stopped
+      environment:
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: postgres
+        POSTGRES_DB: csdl_ptit
+      volumes:
+        - db_data:/var/lib/postgresql/data
+        # Mount the project's init.sql so the DB schema/types are created on first start
+        - ./init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+      ports:
+        - "5432:5432"
+
+  pgadmin:
+      image: dpage/pgadmin4:7
+      container_name: csdl_ptit_pgadmin
+      restart: unless-stopped
+      environment:
+        PGADMIN_DEFAULT_EMAIL: admin@local
+        PGADMIN_DEFAULT_PASSWORD: admin
+      ports:
+        - "8080:80"
+      volumes:
+        - pgadmin_data:/var/lib/pgadmin
+      depends_on:
+        - db
+
+volumes:
+  db_data:
+  pgadmin_data:
+
+# Notes:
+# - The `init.sql` file in the project root will be executed by Postgres on first container start
+#   (only when no database files exist in the `db_data` volume).
+# - Default DB credentials:
+#     host: localhost  port: 5432
+#     user: postgres  password: postgres  database: csdl_ptit
+# - Access pgAdmin at http://localhost:8080 using admin@local / admin
