@@ -116,20 +116,18 @@ CREATE TABLE IF NOT EXISTS tham_gia (
 CREATE TABLE IF NOT EXISTS lich_phat_song (
     ma_lich_phat_song VARCHAR(50) PRIMARY KEY,
     ma_kenh VARCHAR(50) REFERENCES kenh(ma_kenh) ON DELETE CASCADE,
-    nam INT NOT NULL CHECK (nam BETWEEN 1900 AND 3000),
-    thang INT NOT NULL CHECK (thang BETWEEN 1 AND 12),
-    ngay INT NOT NULL CHECK (ngay BETWEEN 1 AND 31),
-    gio INT NOT NULL CHECK (gio BETWEEN 0 AND 23),
-    phut INT NOT NULL CHECK (phut BETWEEN 0 AND 59),
+    thoi_gian_bat_dau TIMESTAMP NOT NULL,
+    thoi_gian_ket_thuc TIMESTAMP NOT NULL,
+    CHECK (thoi_gian_bat_dau < thoi_gian_ket_thuc),
     ma_chuong_trinh VARCHAR(50) NOT NULL,
     so_tap INT NOT NULL,
     FOREIGN KEY (ma_chuong_trinh, so_tap)
         REFERENCES tap(ma_chuong_trinh, so_tap) ON DELETE CASCADE,
-    CONSTRAINT uniq_kenh_thoi_gian UNIQUE (ma_kenh, nam, thang, ngay, gio, phut)
+    CONSTRAINT uniq_kenh_thoi_gian UNIQUE (ma_kenh, thoi_gian_bat_dau)
 );
 
 CREATE INDEX IF NOT EXISTS idx_lich_phat_song_kenh
-    ON lich_phat_song (ma_kenh, nam, thang, ngay, gio, phut);
+    ON lich_phat_song (ma_kenh, thoi_gian_bat_dau, thoi_gian_ket_thuc);
 
 -- ===========================================
 -- 7) Lịch phát sóng - Quảng cáo
