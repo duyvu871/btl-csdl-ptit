@@ -2,5 +2,9 @@
 <project version="4">
   <component name="SqlDialectMappings">
     <file url="file://$PROJECT_DIR$/init.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/scenario/quan_ly_chuong_trinh/6_kiem_tra_quang_cao_het_han.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/scenario/quan_ly_chuong_trinh/7_thong_ke_nguoi_tham_gia.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/scenario/quan_ly_chuong_trinh/8_theo_doi_kenh_chuong_trinh.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/seed.sql" dialect="PostgreSQL" />
   </component>
 </project>
