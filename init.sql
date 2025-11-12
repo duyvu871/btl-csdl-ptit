@@ -39,7 +39,6 @@ CREATE TABLE IF NOT EXISTS chuong_trinh (
     ma_chuong_trinh VARCHAR(50) PRIMARY KEY,
     nam_san_xuat INT CHECK (nam_san_xuat >= 1900),
     do_tuoi_phu_hop TEXT,
-    linh_vuc TEXT,
     mo_ta_noi_dung TEXT,
     quoc_gia_san_xuat TEXT,
     trang_thai trang_thai,
